@@ -44,4 +44,4 @@ legend('N(0,1)','N(1,2)','Decision Boundary')
 hold off
 
 % probability error
-p = normcdf(b1,mu,sigma)+(1-normcdf(b2,mu,sigma))+normcdf(b2,0,1)-normcdf(b1,0,1);
+p = normcdf(b2,mu,sigma)-normcdf(b1,mu,sigma)+normcdf(b1,0,1)+1-normcdf(b2,0,1);

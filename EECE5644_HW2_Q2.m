@@ -15,6 +15,7 @@ p = [0.5 0.5]';
 % plot of generatered true data
 subplot(1,2,1)
 plot(x(1,label==0),x(2,label==0),'o')
+set(gcf,'Position',[100 100 1000 500])
 hold on
 plot(x(1,label==1),x(2,label==1),'+')
 axis equal
@@ -61,6 +62,7 @@ yLDA = sign(mean(yLDA(find(label==1)))-mean(yLDA(find(label==0))))*yLDA; % flip 
 figure(11)
 subplot(1,2,1)
 plot(yLDA(find(label==0)),zeros(1,Nc(1)),'o'), hold on,
+set(gcf,'Position',[100 100 1000 500])
 plot(yLDA(find(label==1)),zeros(1,Nc(2)),'+'), axis equal,
 legend('Class 0','Class 1'), 
 title('LDA projection of data and their true labels'),
@@ -102,6 +104,7 @@ p = [0.5 0.5]';
 % plot of generatered true data
 subplot(1,2,1)
 plot(x(1,label==0),x(2,label==0),'o')
+set(gcf,'Position',[100 100 1000 500])
 hold on
 plot(x(1,label==1),x(2,label==1),'+')
 axis equal
@@ -148,6 +151,7 @@ yLDA = sign(mean(yLDA(find(label==1)))-mean(yLDA(find(label==0))))*yLDA; % flip 
 figure(12)
 subplot(1,2,1)
 plot(yLDA(find(label==0)),zeros(1,Nc(1)),'o'), hold on,
+set(gcf,'Position',[100 100 1000 500])
 plot(yLDA(find(label==1)),zeros(1,Nc(2)),'+'), axis equal,
 legend('Class 0','Class 1'), 
 title('LDA projection of data and their true labels'),
@@ -189,6 +193,7 @@ p = [0.5 0.5]';
 % plot of generatered true data
 subplot(1,2,1)
 plot(x(1,label==0),x(2,label==0),'o')
+set(gcf,'Position',[100 100 1000 500])
 hold on
 plot(x(1,label==1),x(2,label==1),'+')
 axis equal
@@ -235,6 +240,7 @@ yLDA = sign(mean(yLDA(find(label==1)))-mean(yLDA(find(label==0))))*yLDA; % flip 
 figure(13)
 subplot(1,2,1)
 plot(yLDA(find(label==0)),zeros(1,Nc(1)),'o'), hold on,
+set(gcf,'Position',[100 100 1000 500])
 plot(yLDA(find(label==1)),zeros(1,Nc(2)),'+'), axis equal,
 legend('Class 0','Class 1'), 
 title('LDA projection of data and their true labels'),
@@ -276,6 +282,7 @@ p = [0.05 0.95]';
 % plot of generatered true data
 subplot(1,2,1)
 plot(x(1,label==0),x(2,label==0),'o')
+set(gcf,'Position',[100 100 1000 500])
 hold on
 plot(x(1,label==1),x(2,label==1),'+')
 axis equal
@@ -322,6 +329,7 @@ yLDA = sign(mean(yLDA(find(label==1)))-mean(yLDA(find(label==0))))*yLDA; % flip 
 figure(14)
 subplot(1,2,1)
 plot(yLDA(find(label==0)),zeros(1,Nc(1)),'o'), hold on,
+set(gcf,'Position',[100 100 1000 500])
 plot(yLDA(find(label==1)),zeros(1,Nc(2)),'+'), axis equal,
 legend('Class 0','Class 1'), 
 title('LDA projection of data and their true labels'),
@@ -363,6 +371,7 @@ p = [0.05 0.95]';
 % plot of generatered true data
 subplot(1,2,1)
 plot(x(1,label==0),x(2,label==0),'o')
+set(gcf,'Position',[100 100 1000 500])
 hold on
 plot(x(1,label==1),x(2,label==1),'+')
 axis equal
@@ -409,6 +418,7 @@ yLDA = sign(mean(yLDA(find(label==1)))-mean(yLDA(find(label==0))))*yLDA; % flip 
 figure(15)
 subplot(1,2,1)
 plot(yLDA(find(label==0)),zeros(1,Nc(1)),'o'), hold on,
+set(gcf,'Position',[100 100 1000 500])
 plot(yLDA(find(label==1)),zeros(1,Nc(2)),'+'), axis equal,
 legend('Class 0','Class 1'), 
 title('LDA projection of data and their true labels'),
@@ -450,6 +460,7 @@ p = [0.05 0.95]';
 % plot of generatered true data
 subplot(1,2,1)
 plot(x(1,label==0),x(2,label==0),'o')
+set(gcf,'Position',[100 100 1000 500])
 hold on
 plot(x(1,label==1),x(2,label==1),'+')
 axis equal
@@ -496,6 +507,7 @@ yLDA = sign(mean(yLDA(find(label==1)))-mean(yLDA(find(label==0))))*yLDA; % flip 
 figure(16)
 subplot(1,2,1)
 plot(yLDA(find(label==0)),zeros(1,Nc(1)),'o'), hold on,
+set(gcf,'Position',[100 100 1000 500])
 plot(yLDA(find(label==1)),zeros(1,Nc(2)),'+'), axis equal,
 legend('Class 0','Class 1'), 
 title('LDA projection of data and their true labels'),

@@ -7,7 +7,7 @@ N = 10; % # of samples
 M = 100; % # of tests
 K = 21; % # of gamma
 a = -1; b = 1; % range of x distribution
-sigma = 10;
+sigma = 1;
 
 % for Index = 1:4
 %     sigma = 10^(2*(Index-3)+1);

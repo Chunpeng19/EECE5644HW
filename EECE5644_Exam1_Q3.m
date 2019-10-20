@@ -16,7 +16,7 @@ sigma = 1;
 
 % function errorPlot(d,N,M,K,a,b,sigma,Index)
 % error
-e = zeros(M,1);
+e = zeros(M,K);
 e_max = zeros(K,1);
 e_min = zeros(K,1);
 e_25 = zeros(K,1);
@@ -24,22 +24,32 @@ e_75 = zeros(K,1);
 e_med = zeros(K,1);
 gamma = zeros(K,1);
 
+w = zeros(d,1);
+r = a + (b-a).*rand(d-1,1);
+% w(1) = mvnrnd(0,gamma(k)^2);
+w(1) = 1;
+w(2) = -w(1)*(r(1)+r(2)+r(3));
+w(3) = w(1)*(r(1)*r(2)+r(2)*r(3)+r(3)*r(1));
+w(4) = -w(1)*r(1)*r(2)*r(3);
+
+
 for k = 1:K
     
     gamma(k) = 10^(k-(K+1)/2);
-    
+
     % w
-    w = zeros(d,1);
-    r = a + (b-a).*rand(d-1,1);
-    w(1) = mvnrnd(0,gamma(k)^2);
-    w(2) = -w(1)*(r(1)+r(2)+r(3));
-    w(3) = w(1)*(r(1)*r(2)+r(2)*r(3)+r(3)*r(1));
-    w(4) = -w(1)*r(1)*r(2)*r(3);
 
     for j = 1:M
         % v distribution
         x = a + (b-a).*rand(N,1);
         v = mvnrnd(0,sigma^2,N);
+        
+%         w = zeros(d,1);
+%         r = a + (b-a).*rand(d-1,1);
+%         w(1) = mvnrnd(0,gamma(k)^2);
+%         w(2) = -w(1)*(r(1)+r(2)+r(3));
+%         w(3) = w(1)*(r(1)*r(2)+r(2)*r(3)+r(3)*r(1));
+%         w(4) = -w(1)*r(1)*r(2)*r(3);
 
         % y distribution
         y = (w'*[x.^3 x.^2 x ones(N,1)]')'+v;
@@ -57,14 +67,14 @@ for k = 1:K
         B = temp2*gamma(k)^2;
         w_MAP = A\B;
 
-        e(j) = norm(w_MAP-w)^2;
+        e(j,k) = norm(w_MAP-w)^2;
     end
 
-    e_max(k) = max(e);
-    e_min(k) = min(e);
-    e_25(k) = prctile(e,25);
-    e_75(k) = prctile(e,75);
-    e_med(k) = median(e);
+    e_max(k) = max(e(:,k));
+    e_min(k) = min(e(:,k));
+    e_25(k) = prctile(e(:,k),25);
+    e_75(k) = prctile(e(:,k),75);
+    e_med(k) = median(e(:,k));
 
 end
 
@@ -80,7 +90,7 @@ loglog(gamma,e_max,'LineWidth',1.5)
 
 xlabel('gamma')
 ylabel('squared-error')
-legend('minimum error','25% error','median error','75% error','maximum error','Location','southeast')
+legend('minimum error','25% error','median error','75% error','maximum error','Location','northwest')
 title(['Squared-error values for different gamma with sigma = ' num2str(sigma)])
 hold off
 % end

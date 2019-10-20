@@ -57,7 +57,7 @@ for k = 1:K
         B = temp2*gamma(k)^2;
         w_MAP = A\B;
 
-        e(j) = norm(w_MAP-w);
+        e(j) = norm(w_MAP-w)^2;
     end
 
     e_max(k) = max(e);

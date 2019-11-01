@@ -67,7 +67,7 @@ for k = 1:K
             end
             Dalpha = sum(abs(alphaNew-alpha));
             Dmu = sum(sum(abs(muNew-mu)));
-            DSigma = sum(sum(abs(abs(SigmaNew-Sigma))));
+            DSigma = sum(sum(sum(abs(SigmaNew-Sigma))));
             Converged = ((Dalpha+Dmu+DSigma)<delta); % Check if converged
             alpha = alphaNew; mu = muNew; Sigma = SigmaNew;
         end

@@ -106,11 +106,12 @@ yLDA = sign(mean(yLDA(find(LLDA==1)))-mean(yLDA(find(LLDA==0))))*yLDA; % flip yL
 
 lambda = [0 1;1 0]; % loss values
 gamma = (lambda(2,1)-lambda(1,1))/(lambda(1,2)-lambda(2,2)) * alpha(1)/alpha(2); %threshold
-% muLDA = wLDA'*mu;
-% SigmaLDA1 = wLDA'*Sigma(:,:,1)*wLDA;
-% SigmaLDA2 = wLDA'*Sigma(:,:,2)*wLDA;
-% discriminantScore = log(evalGaussian(yLDA,muLDA(:,2),SigmaLDA2))-log(evalGaussian(yLDA,muLDA(:,1),SigmaLDA1))- log(gamma);
-discriminantScore = yLDA + gamma*ones(1,N);
+muLDA = wLDA'*mu;
+SigmaLDA1 = wLDA'*Sigma(:,:,1)*wLDA;
+SigmaLDA2 = wLDA'*Sigma(:,:,2)*wLDA;
+discriminantScore = log(evalGaussian(yLDA,muLDA(:,2),SigmaLDA2))-log(evalGaussian(yLDA,muLDA(:,1),SigmaLDA1))- log(gamma);
+[~,boundInd] = sort(abs(discriminantScore));
+bLDA = (yLDA(boundInd(1))+yLDA(boundInd(2)))/2;
 DLDA = (discriminantScore >= 0);
 ind00 = find(DLDA==0 & LLDA==0); p00 = length(ind00)/Nc(1); % probability of true negative
 ind10 = find(DLDA==1 & LLDA==0); p10 = length(ind10)/Nc(1); % probability of false positive
@@ -126,7 +127,6 @@ plot(x(1,ind11),x(2,ind11),'+g')
 plot(x(1,ind10),x(2,ind10),'or')
 plot(x(1,ind01),x(2,ind01),'+r')
 
-bLDA = -gamma;
 xb = linspace(min(x(1,:)),max(x(1,:)));
 yb = -wLDA(1)/wLDA(2)*xb+bLDA/wLDA(2);
 plot(xb,yb,'b')

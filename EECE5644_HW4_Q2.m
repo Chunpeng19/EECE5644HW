@@ -65,9 +65,10 @@ for CCounter = 1:length(CList)
     PIncorrect(CCounter) = sum(Nincorrect)/N;
 end 
 figure(2), subplot(1,2,1),
-plot(log10(CList),PIncorrect,'.',log10(CList),PIncorrect,'-'),
-xlabel('log_{10} C'),ylabel('K-fold Validation Error Estimate'),
-title('Linear-SVM Cross-Val Error Estimate'),
+plot(log10(CList),PCorrect,'.',log10(CList),PCorrect,'-'),
+xlabel('log_{10} C'),ylabel('K-fold Validation Accuracy Estimate'),
+figure(2), subplot(1,2,1),
+title('Linear-SVM Cross-Val Accuracy Estimate'),
 [minError,indi] = min(PIncorrect);
 CBest1= CList(indi); minError
 SVMBest = fitcsvm(x',l','BoxConstraint',CBest1,'KernelFunction','linear');
@@ -108,15 +109,18 @@ for sigmaCounter = 1:length(sigmaList)
             xTrain = x(:,indTrain); lTrain = l(indTrain);
             SVMk = fitcsvm(xTrain',lTrain,'BoxConstraint',C,'KernelFunction','gaussian','KernelScale',sigma);
             dValidate = SVMk.predict(xValidate')'; % Labels of validation data using the trained SVM
-            indINCORRECT = find(lValidate.*dValidate == -1); 
+            indCORRECT = find(lValidate.*dValidate == 1);
+            indINCORRECT = find(lValidate.*dValidate == -1);
             Nincorrect(k)=length(indINCORRECT);
-        end 
+            Ncorrect(k)=length(indCORRECT);
+        end
+        PCorrect(CCounter,sigmaCounter)=sum(Ncorrect)/N;
         PIncorrect(CCounter,sigmaCounter)= sum(Nincorrect)/N;
     end 
 end
 figure(3), subplot(1,2,1),
-contour(log10(CList),log10(sigmaList),PIncorrect',20); xlabel('log_{10} C'), ylabel('log_{10} sigma'),
-title('Gaussian-SVM Cross-Val Error Estimate'), axis equal,
+contour(log10(CList),log10(sigmaList),PCorrect',20); xlabel('log_{10} C'), ylabel('log_{10} sigma'),
+title('Gaussian-SVM Cross-Val Accuracy Estimate'), axis equal,
 [minError,indi] = min(PIncorrect(:)); [indBestC, indBestSigma] = ind2sub(size(PIncorrect),indi);
 CBest2= CList(indBestC); sigmaBest2= sigmaList(indBestSigma); minError
 SVMBest = fitcsvm(x',l','BoxConstraint',CBest2,'KernelFunction','gaussian','KernelScale',sigmaBest2);

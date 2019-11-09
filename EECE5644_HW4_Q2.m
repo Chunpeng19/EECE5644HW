@@ -117,7 +117,6 @@ end
 figure(3), subplot(1,2,1),
 contour(log10(CList),log10(sigmaList),PIncorrect',20); xlabel('log_{10} C'), ylabel('log_{10} sigma'),
 title('Gaussian-SVM Cross-Val Error Estimate'), axis equal,
-%%
 [minError,indi] = min(PIncorrect(:)); [indBestC, indBestSigma] = ind2sub(size(PIncorrect),indi);
 CBest2= CList(indBestC); sigmaBest2= sigmaList(indBestSigma); minError
 SVMBest = fitcsvm(x',l','BoxConstraint',CBest2,'KernelFunction','gaussian','KernelScale',sigmaBest2);

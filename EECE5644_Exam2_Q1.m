@@ -304,7 +304,7 @@ ylabel('Error')
 hold off
 
 %% final train
-% net = init(net);
+net = init(net);
 net.biases{1}.initFcn = 'rands';
 net.biases{2}.initFcn = 'rands';      
 net.inputWeights{1,1}.initFcn = 'rands';
@@ -328,8 +328,8 @@ nnTrainingError(j) = nnError*100;
 nnMAPError(j) = nnErrorMAP*100;
 
 figure(4)
-% nnTrainingError = [0 5.11 6.96];
-% nnMAPError = [10.56 7.71 7.02];
+% nnTrainingError = [4 5.11 6.96];
+% nnMAPError = [12.11 7.71 7.02];
 samples = [100 1000 10000];
 semilogx(samples, nnTrainingError,'bo-','Linewidth',1.5)
 hold on
